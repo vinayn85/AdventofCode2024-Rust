@@ -1,2 +1,2 @@
-# AdventofCode2024-Kotlin
+# AdventofCode2024-Rust
 AoC 2024
