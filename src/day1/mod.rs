@@ -1,7 +1,6 @@
 mod utils;
 
 use crate::day1::utils::generate_left_and_right_source_lists;
-use std::io::BufRead;
 
 pub fn day1a() {
     //Variables
@@ -27,3 +26,27 @@ pub fn day1a() {
     println!("Day 1a: {}", total_distance);
 }
 
+pub fn day1b() {
+    let mut left_input_list: Vec<i64> = Vec::new();
+    let mut right_input_list: Vec<i64> = Vec::new();
+    let mut similarity_score:i64 = 0;
+
+    generate_left_and_right_source_lists(
+        "./src/day1/input.txt",
+        &mut left_input_list,
+        &mut right_input_list,
+    );
+
+    for left_list_value in left_input_list{
+        let mut similarity_tracker:i64 = 0;
+        right_input_list.iter().for_each(|x|{
+            if *x == left_list_value {
+                similarity_tracker += 1;
+            }
+        });
+        similarity_score = similarity_score + (left_list_value * similarity_tracker);
+    }
+
+    println!("Similarity score: {}", similarity_score);
+
+}
