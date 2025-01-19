@@ -25,7 +25,7 @@ fn load_vec_string_values() -> Vec<String> {
     }
     levels_string_data
 }
-pub fn safety_check(vec: Vec<Vec<i64>>, vec1: &mut Vec<bool>) {
+pub fn do_safety_check(vec: Vec<Vec<i64>>, vec1: &mut Vec<bool>) {
     for current_level in vec {
         let is_increasing = is_increasing_levels(&current_level);
         let is_decreasing = is_decreasing_levels(&current_level);
@@ -34,9 +34,28 @@ pub fn safety_check(vec: Vec<Vec<i64>>, vec1: &mut Vec<bool>) {
         if (is_increasing || is_decreasing) && is_allowable_level_diff {
             vec1.push(true);
         } else {
-            vec1.push(false);
+            vec1.push(do_safety_check_with_damper(&current_level));
         }
     }
+}
+
+pub fn do_safety_check_with_damper(vec: &Vec<i64>) -> bool {
+    let temp_vec_as_array = vec.as_slice();
+    for i in 0..temp_vec_as_array.len() {
+        let part1 = &temp_vec_as_array[..i];
+        let part2 = &temp_vec_as_array[i + 1..];
+
+        let temp_damped_level = [part1, part2].concat();
+
+        if (is_increasing_levels(&temp_damped_level) || is_decreasing_levels(&temp_damped_level))
+            && is_allowable_level_diff(&temp_damped_level)
+        {
+            return true;
+        } else {
+            continue;
+        }
+    }
+    false
 }
 fn is_increasing_levels(vec: &Vec<i64>) -> bool {
     vec.is_sorted_by(|a, b| a < b)
