@@ -29,7 +29,7 @@ pub fn day1a() {
 pub fn day1b() {
     let mut left_input_list: Vec<i64> = Vec::new();
     let mut right_input_list: Vec<i64> = Vec::new();
-    let mut similarity_score:i64 = 0;
+    let mut similarity_score: i64 = 0;
 
     generate_left_and_right_source_lists(
         "./src/day1/input.txt",
@@ -37,9 +37,9 @@ pub fn day1b() {
         &mut right_input_list,
     );
 
-    for left_list_value in left_input_list{
-        let mut similarity_tracker:i64 = 0;
-        right_input_list.iter().for_each(|x|{
+    for left_list_value in left_input_list {
+        let mut similarity_tracker: i64 = 0;
+        right_input_list.iter().for_each(|x| {
             if *x == left_list_value {
                 similarity_tracker += 1;
             }
@@ -48,5 +48,4 @@ pub fn day1b() {
     }
 
     println!("Similarity score: {}", similarity_score);
-
 }
