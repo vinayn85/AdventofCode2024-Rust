@@ -1,10 +1,6 @@
 mod utils;
 
-use crate::day2::utils::{do_safety_check, do_safety_check_with_damper, generate_source_list};
-use std::collections::HashMap;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
-use std::path::Path;
+use crate::day2::utils::{do_safety_check, generate_source_list};
 
 pub fn day2a() {
     let mut safety_status: Vec<bool> = Vec::new();
